@@ -1,4 +1,5 @@
 package com.deepika.communityhub.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class User {
     private String lastName;
     private String username;
     private String email;
+    @JsonIgnore
     private String password;
     
     
