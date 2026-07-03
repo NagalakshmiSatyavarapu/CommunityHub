@@ -26,9 +26,13 @@ public class User {
     private String password;
     
     
-    @JsonManagedReference
+    @JsonManagedReference("user-post")
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
+    
+    @JsonManagedReference("user-comment")
+    @OneToMany(mappedBy="user")
+    private List<Comment> comments;
 	public Long getId() {
 		return id;
 	}
@@ -64,6 +68,13 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public List<Comment> getComments() {
+	    return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+	    this.comments = comments;
 	}
 	
 }

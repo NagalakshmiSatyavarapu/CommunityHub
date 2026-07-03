@@ -1,13 +1,15 @@
 package com.deepika.communityhub.entity;
-
+import com.deepika.communityhub.entity.Comment;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,10 +24,15 @@ public class Post {
 
     private String content;
 
-    @JsonBackReference
+    @JsonBackReference("user-post")
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    
+    @JsonManagedReference("post-comment")
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments;
+    
 
     // Getters & Setters
 
@@ -59,5 +66,11 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+    public List<Comment> getComments(){
+    	return comments;
+    }
+    public void setComments(List<Comment> comments) {
+    	this.comments=comments;
     }
 }

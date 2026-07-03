@@ -16,11 +16,13 @@ public class CommentController {
     private CommentService commentService;
 
     // Create Comment
-    @PostMapping
-    public Comment createComment(@RequestBody Comment comment) {
-        return commentService.saveComment(comment);
-    }
+    @PostMapping("/posts/{postId}/users/{userId}")
+    public Comment createComment(@PathVariable Long postId,
+                                 @PathVariable Long userId,
+                                 @RequestBody Comment comment) {
 
+        return commentService.saveComment(userId, postId, comment);
+    }
     // Get All Comments
     @GetMapping
     public List<Comment> getAllComments() {
